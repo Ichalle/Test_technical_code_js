@@ -3,10 +3,16 @@ import './App.css';
 
 
 function App() {
-  const [inputValue, setInputValue ] = useState(1345000);
+  const [inputValue, setInputValue ] = useState();
+  const [isNumber, setIsNumber] = useState(false);
   const [result, setResult] = useState([]);
   const [minusNum, setMinusNum] = useState([]);
   const [primeNum, setPrimeNum] = useState([]);
+
+  const handleInput = (value) => {
+    setIsNumber(isNaN(value) === false)
+    setInputValue(value)
+  }
 
   const triangle = () => {
     let result = []
@@ -67,7 +73,10 @@ function App() {
 
   return (
     <div className="App">
-      <input type='text' value={inputValue} onChange={e => setInputValue(e.target.value)} />
+      {!isNumber ? (
+        <p>Wajib input angka</p>
+      ) : null}
+      <input type='text' value={inputValue} onChange={e => handleInput(e.target.value)} />
 
       <div>
         <button onClick={triangle}>Generata segitiga</button>
